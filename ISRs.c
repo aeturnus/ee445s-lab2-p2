@@ -45,20 +45,20 @@ Uint32 table[BUFFER_COUNT]; // Declate a table having 1024 entries
 #define EDMA_CONFIG_EVENT_MASK				3	// using events 0 (rx) and 1 (tx)
 #define EDMA_CONFIG_INTERRUPT_MASK			1	// interrupt on rx reload only
 
-#define LUT_ENTRIES 1024
+#define LUT_ENTRIES BUFFER_COUNT
 #define SCALE_FACTOR 32000
 #define PI 3.1415926535897932384626f
 #define F0 1000
 #define FS 8000
-static Uint32 cosineTable[LUT_ENTRIES];
 void createtable()
 {
 	// Enter your own version of generating a table of cosine wave values at a frequency of 1 KHz and 2 KHz at a sampling frequency of 8 KHz. The table should be 1024 entries long.
 	// Use a suitable scale factor.
 	// Generate the table entries in float, then cast them to Uint32.
-	for( int i = 0; i < LUT_ENTRIES; i++ )
+	int i;
+	for( i = 0; i < LUT_ENTRIES; i++ )
 	{
-		cosineTable[i] = (Uint32) (cosf(2 * PI * ((float)FO) / ((float)FS) * i )) * SCALE_FACTOR);
+		table[i] = (Uint32) (cosf(2 * PI * ((float)F0) / ((float)FS) * i ) * SCALE_FACTOR );
 	}
 
 }
